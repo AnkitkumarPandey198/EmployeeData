@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">EmpData</string>
+    <string name="login">Login</string>
+    <string name="employeeEmail">Email</string>
+    <string name="employeePassword">Password</string>
+    <string name="need_an_account_signup">Need an account?<u>SIGN UP</u></string>
+    <string name="or">OR</string>
+    <string name="forget_password">forget password?</string>
+    <string name="add_employees">Add Employees</string>
+    <string name="show_employees">Show employees</string>
+    <string name="addEmployees">SAVE</string>
+    <string name="age">Age</string>
+    <string name="position">Position</string>
+    <string name="salary">Salary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nameValue">Name:</string>
+    <string name="ageValue">Age:</string>
+    <string name="positionValue">Position</string>
+    <string name="salaryValue">Salary:</string>
+    <string name="emailValue">Email:</string>
+    <string name="passwordValue">Password:</string>
+    <string name="values">Value</string>
+
+
+</resources>
