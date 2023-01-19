@@ -1,32 +1,22 @@
 package com.example.empdata.view;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.text.InputFilter;
-import android.text.Spanned;
-import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.presenter.AddEmployeePresenter;
-
-import java.util.Objects;
 
 
 public class AddEmployeeFragment extends Fragment {
 
     public EditText mNameEditText,mPositionEditText,mSalaryEditText,mAgeEditText,mEmailEditText,mPasswordEditText;
-    private Button mSaveButton;
     AddEmployeePresenter mPresenter;
 
     @Override
@@ -37,17 +27,14 @@ public class AddEmployeeFragment extends Fragment {
         mPresenter = new AddEmployeePresenter(this, database);
         mNameEditText = view.findViewById(R.id.employeeName);
         mNameEditText.setFilters(new InputFilter[] {
-                new InputFilter() {
-                    public CharSequence filter(CharSequence src, int start,
-                                               int end, Spanned dst, int dstart, int dend) {
-                        if (src.equals("")) { // for backspace
-                            return src;
-                        }
-                        if (src.toString().matches("[A-Z ]+")) {
-                            return src;
-                        }
-                        return "";
+                (src, start, end, dst, dStart, dEnd) -> {
+                    if (src.equals("")) { // for backspace
+                        return src;
                     }
+                    if (src.toString().matches("[A-Z ]+")) {
+                        return src;
+                    }
+                    return "";
                 }
         });
         mAgeEditText = view.findViewById(R.id.employeeAge);
@@ -55,24 +42,13 @@ public class AddEmployeeFragment extends Fragment {
         mSalaryEditText = view.findViewById(R.id.employeeSalary);
         mEmailEditText =  view.findViewById(R.id.employeeEmail);
         mPasswordEditText = view.findViewById(R.id.employeePassword);
-        mSaveButton = view.findViewById(R.id.addEmployeeBtn);
+        Button mSaveButton = view.findViewById(R.id.addEmployeeBtn);
 
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.onSaveButtonClicked();
-            }
-        });
+        mSaveButton.setOnClickListener(v -> mPresenter.onSaveButtonClicked());
 
         return view;
     }
 
-    public void initMenuBar(View view){
-        ActionBar actionBar =Objects.requireNonNull((AppCompatActivity) requireActivity()).getSupportActionBar();
-        actionBar.setTitle("Add Employee");
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.show();
-    }
 
     public void navigateToHomeFragment(){
         LoginFragment mFragment = new LoginFragment();
@@ -80,7 +56,7 @@ public class AddEmployeeFragment extends Fragment {
         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,mFragment).addToBackStack("name").commit();
     }
 
-    public boolean validateEmail(EditText editText){
+    public boolean validateEmail(){
         String input = mEmailEditText.getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         boolean isValidate = input.matches(emailPattern);
@@ -97,7 +73,7 @@ public class AddEmployeeFragment extends Fragment {
         return isValidate;
     }
 
-    public boolean validatePassword(EditText editText){
+    public boolean validatePassword(){
         String password = mPasswordEditText.getText().toString();
         boolean hasUpper = !password.equals(password.toLowerCase());
         boolean hasLower = !password.equals(password.toUpperCase());

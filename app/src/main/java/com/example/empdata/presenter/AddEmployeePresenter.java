@@ -1,6 +1,5 @@
 package com.example.empdata.presenter;
 
-import android.text.method.DigitsKeyListener;
 import android.widget.Toast;
 import com.example.empdata.model.Employee;
 import com.example.empdata.model.EmployeeDatabase;
@@ -23,7 +22,7 @@ public class AddEmployeePresenter {
         String email = mAddEmployeeFragment.mEmailEditText.getText().toString();
         String password = mAddEmployeeFragment.mPasswordEditText.getText().toString();
         int salary = Integer.parseInt(mAddEmployeeFragment.mSalaryEditText.getText().toString());
-        if(!mAddEmployeeFragment.validateEmail(mAddEmployeeFragment.mEmailEditText) && !mAddEmployeeFragment.validatePassword(mAddEmployeeFragment.mPasswordEditText)){
+        if(!mAddEmployeeFragment.validateEmail() && !mAddEmployeeFragment.validatePassword()){
             Toast.makeText(mAddEmployeeFragment.requireContext(),"Enter the Correct data",Toast.LENGTH_LONG).show();
         }else {
             Employee employee = new Employee(name, age, position, salary, email, password);
