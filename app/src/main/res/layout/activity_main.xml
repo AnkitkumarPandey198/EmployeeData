@@ -6,15 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.empdata.view.LoginFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_login" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/background" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageEmployee"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/employee"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@id/imageEmployee"
+        app:layout_constraintEnd_toEndOf="@id/imageEmployee"
+        app:layout_constraintTop_toBottomOf="@id/imageEmployee"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

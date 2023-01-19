@@ -21,6 +21,10 @@
     <string name="emailValue">Email:</string>
     <string name="passwordValue">Password:</string>
     <string name="values">Value</string>
+    <string name="background">background</string>
+    <string name="foreground">foreground</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 
 
 </resources>

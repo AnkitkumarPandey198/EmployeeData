@@ -2,6 +2,8 @@ package com.example.empdata.view;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -33,14 +35,11 @@ public class LoginFragment extends Fragment {
         mEmployeePassword = view.findViewById(R.id.employeePassword);
         mLoginButton = view.findViewById(R.id.loginBtn);
         mSignView = view.findViewById(R.id.needAccount);
-
         mLoginButton.setOnClickListener(v -> mPresenter.onLoginButtonClicked());
-
         mSignView.setOnClickListener(v -> mPresenter.onSignUpClicked());
-
-
         return view;
     }
+
 
     public void showHomePage(){
         HomeFragment mFragment = new HomeFragment();

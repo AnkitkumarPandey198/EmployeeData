@@ -17,4 +17,8 @@ public class HomePresenter {
     public void onShowEmployeeButtonClicked() {
         mHomeFragment.navigateToShowEmployeeFragment();
     }
+
+    public void onLoginButtonClicked() {
+        mHomeFragment.navigateToLoginEmployeeFragment();
+    }
 }
