@@ -44,6 +44,5 @@ public class AddEmployeePresenter {
             mDatabase.employeeDao().insert(employee);
         }
 
-
     }
 }

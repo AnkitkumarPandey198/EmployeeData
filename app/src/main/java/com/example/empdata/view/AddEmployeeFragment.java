@@ -96,7 +96,7 @@ public class AddEmployeeFragment extends Fragment {
         if (TextUtils.isEmpty(email)) {
             mEmailEditText.setError("Email is required");
             isValid = false;
-        } else  if (isValidate) {
+        } else if (isValidate) {
             Toast.makeText(requireActivity().getApplicationContext(), "Email is Correct", Toast.LENGTH_SHORT).show();
             isValid = true;
 
@@ -111,14 +111,14 @@ public class AddEmployeeFragment extends Fragment {
         } else if (password.length() < 8) {
             mPasswordEditText.setError("Password must be at least 8 characters long");
             isValid = false;
-        }else {
+        } else {
             if (isValidatePassword) {
                 Toast.makeText(requireActivity().getApplicationContext(), "Password is Valid", Toast.LENGTH_SHORT).show();
-                isValid= true;
+                isValid = true;
 
             } else {
                 mPasswordEditText.setError("Password must have atLeast one uppercase,lowercase, number and special characters");
-                isValid =false;
+                isValid = false;
             }
         }
 
@@ -132,5 +132,4 @@ public class AddEmployeeFragment extends Fragment {
         }
         return isValid;
     }
-
 }
