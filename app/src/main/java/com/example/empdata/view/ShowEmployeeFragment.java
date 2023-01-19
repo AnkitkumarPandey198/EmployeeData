@@ -39,12 +39,7 @@ public class ShowEmployeeFragment extends Fragment {
         mEmployeeRecyclerView = view.findViewById(R.id.employee_recycler_view);
         mEmployeeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getParentFragmentManager().popBackStack();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getParentFragmentManager().popBackStack());
         return view;
     }
 

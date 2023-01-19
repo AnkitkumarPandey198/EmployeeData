@@ -9,6 +9,9 @@ public class AddEmployeePresenter {
     private final AddEmployeeFragment
             mAddEmployeeFragment;
     private final EmployeeDatabase mDatabase;
+    int age;
+    int salary;
+    Employee employee;
 
     public AddEmployeePresenter(AddEmployeeFragment addEmployeeFragment, EmployeeDatabase database) {
         mAddEmployeeFragment = addEmployeeFragment;
@@ -18,18 +21,29 @@ public class AddEmployeePresenter {
     public void onSaveButtonClicked() {
         String name = mAddEmployeeFragment.mNameEditText.getText().toString();
         String position = mAddEmployeeFragment.mPositionEditText.getText().toString();
-        int age = Integer.parseInt(mAddEmployeeFragment.mAgeEditText.getText().toString());
         String email = mAddEmployeeFragment.mEmailEditText.getText().toString();
         String password = mAddEmployeeFragment.mPasswordEditText.getText().toString();
-        int salary = Integer.parseInt(mAddEmployeeFragment.mSalaryEditText.getText().toString());
-        if(!mAddEmployeeFragment.validateEmail() && !mAddEmployeeFragment.validatePassword()){
-            Toast.makeText(mAddEmployeeFragment.requireContext(),"Enter the Correct data",Toast.LENGTH_LONG).show();
+        try {
+            age = Integer.parseInt(mAddEmployeeFragment.mAgeEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            mAddEmployeeFragment.mAgeEditText.setError("Enter the Age");
+        }
+
+
+        try {
+            salary = Integer.parseInt(mAddEmployeeFragment.mSalaryEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            mAddEmployeeFragment.mSalaryEditText.setError("Enter the Salary");
+        }
+
+        if(!mAddEmployeeFragment.isInputValid()) {
+            return;
         }else {
-            Employee employee = new Employee(name, age, position, salary, email, password);
+            employee = new Employee(name, age, position, salary, email, password);
             Toast.makeText(mAddEmployeeFragment.getContext(), "Employee Data Added", Toast.LENGTH_LONG).show();
             mDatabase.employeeDao().insert(employee);
-            mAddEmployeeFragment.navigateToHomeFragment();
         }
+
 
     }
 }
