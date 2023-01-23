@@ -21,6 +21,9 @@ public interface EmployeeDao {
     @Delete
     void delete(Employee employee);
 
+    @Query("Select name from employee_table where email =:email")
+    String getUserName(String email);
+
     @Query("Select * from employee_table where email =:email and password =:password")
     boolean isUserValid(String email,String password);
 

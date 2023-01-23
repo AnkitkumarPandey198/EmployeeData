@@ -80,7 +80,7 @@ public class AddEmployeeFragment extends Fragment {
         boolean hasSpecial = !password.matches("[A-Za-z0-9 ]*");
         boolean isValidatePassword = hasUpper && hasLower && hasDigit && hasSpecial;
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-z0-9._-]+@[a-z]+\\.+[a-z]+";
         boolean isValidate = email.matches(emailPattern);
 
         if (TextUtils.isEmpty(name)) {

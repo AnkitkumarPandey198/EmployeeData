@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="@string/login"
-        android:textSize="45sp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,8 +74,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:backgroundTint="#E91E63"
         android:text="@string/login"
+        android:background="@drawable/shape"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/textInputLayout3"
         app:layout_constraintStart_toStartOf="@id/textInputLayout3"

@@ -36,12 +36,14 @@ public class AddEmployeePresenter {
             mAddEmployeeFragment.mSalaryEditText.setError("Enter the Salary");
         }
 
-        if(!mAddEmployeeFragment.isInputValid()) {
-            return;
-        }else {
+        if(mAddEmployeeFragment.isInputValid()) {
             employee = new Employee(name, age, position, salary, email, password);
             Toast.makeText(mAddEmployeeFragment.getContext(), "Employee Data Added", Toast.LENGTH_LONG).show();
             mDatabase.employeeDao().insert(employee);
+
+        }else {
+            Toast.makeText(mAddEmployeeFragment.getContext(), "Please enter the Values in Required field", Toast.LENGTH_LONG).show();
+
         }
 
     }
