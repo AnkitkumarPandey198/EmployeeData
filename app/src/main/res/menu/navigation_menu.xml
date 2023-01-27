@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/nav_addEmployee"
@@ -10,8 +11,16 @@
         android:title="@string/show_employees" />
 
     <item
-        android:id="@+id/nav_logout"
-        android:title="Logout" />
+        android:id="@+id/nav_image_picker"
+        android:title="@string/pick_image"
+        />
 
+    <item
+        android:id="@+id/nav_my_devices"
+        android:title="@string/my_devices" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="@string/logout" />
 
 </menu>

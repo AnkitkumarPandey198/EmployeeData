@@ -34,6 +34,10 @@ public class HomePresenter {
         mHomeFragment.navigateToLoginEmployeeFragment();
     }
 
+    public  void OnImagePickerButtonClicked(){mHomeFragment.navigateImagePickerFragment();}
+
+    public  void OnMyDeviceButtonClicked(){mHomeFragment.navigateToBluetoothFragment();}
+
 
 
 

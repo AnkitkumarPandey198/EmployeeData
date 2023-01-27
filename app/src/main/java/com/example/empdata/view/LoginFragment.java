@@ -40,11 +40,7 @@ public class LoginFragment extends Fragment {
         mSignView = view.findViewById(R.id.needAccount);
         mLoginButton.setOnClickListener(v ->{
             String email = mEmployeeEmail.getText().toString();
-            String password = mEmployeePassword.getText().toString();
             userName = database.employeeDao().getUserName(email);
-
-            Fragment fragment = new HomeFragment();
-
             mPresenter.onLoginButtonClicked();
         });
         mSignView.setOnClickListener(v -> mPresenter.onSignUpClicked());

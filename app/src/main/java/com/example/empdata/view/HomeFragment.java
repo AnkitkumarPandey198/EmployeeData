@@ -20,12 +20,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.empdata.MainActivity;
-import com.example.empdata.MainActivity2;
 import com.example.empdata.R;
 import com.example.empdata.SplashActivity;
 import com.example.empdata.presenter.HomePresenter;
-import com.example.empdata.presenter.LoginPresenter;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -35,7 +32,6 @@ public class HomeFragment extends Fragment {
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
     HomeFragment homeFragment;
-    LoginPresenter loginPresenter;
     private static final String LOGIN_PREFS = "session_preferences";
     private static final String IS_LOGGED_IN = "is_logged_in";
 
@@ -45,7 +41,7 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         homeFragment = new HomeFragment();
-        mPresenter = new HomePresenter(this );
+        mPresenter = new HomePresenter(this);
         Button mAddEmployeeButton = view.findViewById(R.id.addEmployee);
         Button mShowEmployeeButton = view.findViewById(R.id.showEmployee);
         mAddEmployeeButton.setOnClickListener(v -> mPresenter.onAddEmployeeButtonClicked());
@@ -57,7 +53,7 @@ public class HomeFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle =  new ActionBarDrawerToggle(requireActivity(),drawerLayout,toolbar,R.string.nav_open,R.string.nav_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         Bundle bundle = this.getArguments();
@@ -67,7 +63,7 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.nav_addEmployee:
                         mPresenter.onAddEmployeeButtonClicked();
@@ -75,6 +71,14 @@ public class HomeFragment extends Fragment {
 
                     case R.id.nav_showEmployee:
                         mPresenter.onShowEmployeeButtonClicked();
+                        return true;
+
+                    case R.id.nav_image_picker:
+                        mPresenter.OnImagePickerButtonClicked();
+                        return true;
+
+                    case R.id.nav_my_devices:
+                        mPresenter.OnMyDeviceButtonClicked();
                         return true;
 
                     case R.id.nav_logout:
@@ -90,19 +94,32 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void navigateToAddEmployeeFragment(){
+    public void navigateToAddEmployeeFragment() {
         AddEmployeeFragment mFragment = new AddEmployeeFragment();
         mFragment.setArguments(new Bundle());
-        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,mFragment).addToBackStack("name").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
     }
 
-    public void navigateToShowEmployeeFragment(){
+    public void navigateToShowEmployeeFragment() {
         ShowEmployeeFragment mFragment = new ShowEmployeeFragment();
         mFragment.setArguments(new Bundle());
-        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,mFragment).addToBackStack("name").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
     }
 
-    public void navigateToLoginEmployeeFragment(){
+    public void navigateImagePickerFragment() {
+        ImagePickerFragment mFragment = new ImagePickerFragment();
+        mFragment.setArguments(new Bundle());
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
+    }
+
+
+    public void navigateToBluetoothFragment() {
+        BluetoothFragment mFragment = new BluetoothFragment();
+        mFragment.setArguments(new Bundle());
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
+    }
+
+    public void navigateToLoginEmployeeFragment() {
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(LOGIN_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(IS_LOGGED_IN, false);
@@ -113,6 +130,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    }
+}
 
 

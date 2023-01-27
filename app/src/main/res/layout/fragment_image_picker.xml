@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.ImagePickerFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="#E91E63"
+        android:textAlignment="center"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Pick Image"
+        app:titleMarginStart="85dp"
+        app:titleTextColor="#FFFFFF" />
+
+
+    <ImageView
+        android:id="@+id/imageEmployee"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/picture"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Switch
+        android:id="@+id/bluetooth_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:checked="false"
+        android:padding="10dp"
+        android:text="@string/camera"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@id/imageEmployee"
+        app:layout_constraintStart_toStartOf="@id/imageEmployee"
+        app:layout_constraintTop_toBottomOf="@id/imageEmployee"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/bluetooth_switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:checked="false"
+        android:padding="10dp"
+        android:text="@string/gallery"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/bluetooth_switch"
+        app:layout_constraintStart_toStartOf="@+id/bluetooth_switch"
+        app:layout_constraintTop_toBottomOf="@+id/bluetooth_switch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

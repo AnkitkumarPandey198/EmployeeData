@@ -26,6 +26,12 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="coding">Coding</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="my_devices">My Devices</string>
+    <string name="logout">Logout</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="bluetooth">Bluetooth</string>
 
 
 </resources>
