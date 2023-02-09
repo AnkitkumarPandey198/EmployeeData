@@ -20,6 +20,14 @@
         android:title="@string/my_devices" />
 
     <item
+        android:id="@+id/nav_news"
+        android:title="@string/news" />
+
+    <item
+        android:id="@+id/nav_movies"
+        android:title="Movies" />
+
+    <item
         android:id="@+id/nav_logout"
         android:title="@string/logout" />
 

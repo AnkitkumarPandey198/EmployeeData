@@ -32,6 +32,47 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="bluetooth">Bluetooth</string>
+    <string name="api_key">97f8ff7f847b4e75b1ac0e43bc2d888e</string>
+    <string name="news">News</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="general">General</string>
+    <string name="health">health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="time">Time</string>
+    <string name="_20">20</string>
+    <string name="_13">13</string>
+
+    <string name="communication_error">Error in getting data. Please try again later.</string>
+    <string name="most_popular_movies">Most Popular Movies</string>
+    <string name="overview">Overview</string>
+    <string name="top_billed_cast">Top Billed Cast</string>
+    <string name="details">Details</string>
+    <string name="homepage">Home Page</string>
+    <string name="tagline">Tagline</string>
+    <string name="Runtime">Runtime</string>
+    <string name="filter">Filter</string>
+    <string name="release_date">Release date:</string>
+    <string name="from">Select From</string>
+    <string name="to">Select To</string>
+    <string name="clear_all">Clear All</string>
+    <string name="error_date_filter">Please select from and to dates.</string>
+    <string name="no_movies">Oops! No result found.</string>
+    <string name="error_data">Something went wrong! Please try again later.</string>
+    <string name="done">Done</string>
+    <string name="movie_name">movie_name</string>
+    <string name="rating_tv">rating_tv</string>
 
 
 </resources>

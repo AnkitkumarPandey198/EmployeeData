@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.example.empdata.R;
 import com.example.empdata.SplashActivity;
+import com.example.empdata.movielist.MoviesActivity;
+import com.example.empdata.news.newsview.NewsFragment;
 import com.example.empdata.presenter.HomePresenter;
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
     HomeFragment homeFragment;
     private static final String LOGIN_PREFS = "session_preferences";
     private static final String IS_LOGGED_IN = "is_logged_in";
+
+    String userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +61,11 @@ public class HomeFragment extends Fragment {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         Bundle bundle = this.getArguments();
-        String userName = bundle.getString("key");
+        if(bundle != null){
+        userName = bundle.getString("key");}
+        else{
+            getParentFragmentManager().getPrimaryNavigationFragment();
+        }
         userNameTextView.setText(userName);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
@@ -79,6 +87,14 @@ public class HomeFragment extends Fragment {
 
                     case R.id.nav_my_devices:
                         mPresenter.OnMyDeviceButtonClicked();
+                        return true;
+
+                    case R.id.nav_news:
+                        mPresenter.onNewsButtonClicked();
+                        return true;
+
+                    case R.id.nav_movies:
+                        mPresenter.OnMoviesButtonClicked();
                         return true;
 
                     case R.id.nav_logout:
@@ -127,6 +143,18 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(requireActivity(), SplashActivity.class);
         startActivity(intent);
 
+
+    }
+
+    public void navigateToNewsFragment() {
+        NewsFragment mFragment = new NewsFragment();
+        mFragment.setArguments(new Bundle());
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
+    }
+
+    public void navigateToMoviesFragment() {
+        Intent intent = new Intent(requireActivity(), MoviesActivity.class);
+        startActivity(intent);
 
     }
 

@@ -1,7 +1,6 @@
 package com.example.empdata.view;
 
 
-import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -26,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.widget.Toast;
 
 import com.example.empdata.R;
 
@@ -38,6 +38,7 @@ public class BluetoothFragment extends Fragment {
     ListView scannedListView;
     ArrayList<String> stringArrayList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,10 +63,19 @@ public class BluetoothFragment extends Fragment {
                         }
                     }
                     bluetoothAdapter.startDiscovery();
-                    IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-                    getActivity().getApplicationContext().registerReceiver(bluetoothReceiver, filter);
+                    if (bluetoothAdapter.isDiscovering()) {
+                        // Bluetooth is currently discovering new devices
+                        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                        getActivity().registerReceiver(bluetoothReceiver, filter);
+                        Toast.makeText(requireContext(),"Bluetooth Discovery Started",Toast.LENGTH_LONG).show();
+                    } else {
+                        // Bluetooth is not currently discovering new devices
+                        Toast.makeText(requireContext(),"Bluetooth Discovery NOT Started",Toast.LENGTH_LONG).show();
+                    }
+
                     arrayAdapter = new ArrayAdapter<>(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringArrayList);
                     scannedListView.setAdapter(arrayAdapter);
+
 
                 }
             }else {
@@ -74,6 +84,9 @@ public class BluetoothFragment extends Fragment {
                 requireContext().unregisterReceiver(bluetoothReceiver);
             }
         });
+
+
+
 
         return view;
     }
@@ -87,15 +100,16 @@ public class BluetoothFragment extends Fragment {
     }
 
    private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
-        @SuppressLint("NotifyDataSetChanged")
+
         @Override
         public void onReceive(Context context, Intent intent) {
+            Toast.makeText(requireContext(),"Bluetooth Receiver is called",Toast.LENGTH_LONG).show();
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if(checkBluetoothPermission()){
                 stringArrayList.add(device.getName());
-                Log.d("Taggg",device.getName());}
+                Log.d("Tag",device.getName());}
                 arrayAdapter.notifyDataSetChanged();
             }
         }
