@@ -1,9 +1,13 @@
 package com.example.empdata.presenter;
 
 import android.widget.Toast;
+
+import com.example.empdata.firebaseDatabase.EmployeeHelperClass;
 import com.example.empdata.model.Employee;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.view.AddEmployeeFragment;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddEmployeePresenter {
     private final AddEmployeeFragment
@@ -13,16 +17,22 @@ public class AddEmployeePresenter {
     int salary;
     Employee employee;
 
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
     public AddEmployeePresenter(AddEmployeeFragment addEmployeeFragment, EmployeeDatabase database) {
         mAddEmployeeFragment = addEmployeeFragment;
         mDatabase = database;
     }
 
     public void onSaveButtonClicked() {
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("employees");
         String name = mAddEmployeeFragment.mNameEditText.getText().toString();
         String position = mAddEmployeeFragment.mPositionEditText.getText().toString();
         String email = mAddEmployeeFragment.mEmailEditText.getText().toString();
         String password = mAddEmployeeFragment.mPasswordEditText.getText().toString();
+        String username = mAddEmployeeFragment.mUserNameEditText.getText().toString();
         try {
             age = Integer.parseInt(mAddEmployeeFragment.mAgeEditText.getText().toString());
         } catch (NumberFormatException e) {
@@ -37,6 +47,9 @@ public class AddEmployeePresenter {
         }
 
         if(mAddEmployeeFragment.isInputValid()) {
+            EmployeeHelperClass helperClass = new EmployeeHelperClass(name, age, position, salary, email, password,username);
+            reference.child(username).setValue(helperClass);
+            mAddEmployeeFragment.navigateToLogin();
             employee = new Employee(name, age, position, salary, email, password);
             Toast.makeText(mAddEmployeeFragment.getContext(), "Employee Data Added", Toast.LENGTH_LONG).show();
             mDatabase.employeeDao().insert(employee);

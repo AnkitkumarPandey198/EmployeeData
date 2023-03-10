@@ -21,13 +21,13 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
 
-    int targetWidth = 500;
-    int targetHeight = 500;
+    int targetWidth = 500; // width of the image
+    int targetHeight = 500; // height of the  image
 
     private Context context;
-    private List<NewsHeadlines> headlines;
+    private List<NewsHeadlines> headlines; // list of the headlines
 
-    private SelectListener listener;
+    private SelectListener listener; //listener interface for opening news overview
 
     public NewsAdapter(Context context, List<NewsHeadlines> headlines, SelectListener listener) {
         this.context = context;
@@ -68,6 +68,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        //widget required to show the result
+
         TextView text_title,text_source;
         ImageView img_headline;
         CardView cardView;

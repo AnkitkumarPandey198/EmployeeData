@@ -115,7 +115,7 @@ public class NewsFragment extends Fragment implements SelectListener, View.OnCli
     @Override
     public void OnNewsClicked(NewsHeadlines newsHeadlines) {
 
-       startActivity(new Intent(requireActivity(),DetailsActivity.class).putExtra("data",newsHeadlines));
+        startActivity(new Intent(requireActivity(),DetailsActivity.class).putExtra("data",newsHeadlines));
 
     }
 

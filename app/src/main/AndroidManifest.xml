@@ -23,14 +23,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpData"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDeG02gwXUM7Ifq2eY_WfK18-odfN6mS_4" />
+
         <activity
             android:name=".movielist.MovieDetailsActivity"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".movielist.MoviesActivity"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".news.newsview.DetailsActivity"
             android:exported="false"
@@ -46,8 +51,7 @@
         <activity
             android:name=".MainActivity2"
             android:exported="false"
-            android:theme="@style/AppTheme"
-            >
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

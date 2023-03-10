@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.empdata.view.AddEmployeeFragment;
 import com.example.empdata.view.HomeFragment;
 import com.example.empdata.view.LoginFragment;
 
@@ -30,7 +31,7 @@ public class MainActivity2 extends AppCompatActivity {
         if(isLoggedIn) {
             getSupportFragmentManager().popBackStack();
         }else {
-            fragmentTransaction.replace(R.id.fragmentContainerView, new LoginFragment());
+            fragmentTransaction.replace(R.id.fragmentContainerView, new AddEmployeeFragment());
         }
         fragmentTransaction.commit();
 

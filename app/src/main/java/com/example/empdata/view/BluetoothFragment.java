@@ -1,6 +1,7 @@
 package com.example.empdata.view;
 
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -17,15 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import android.Manifest;
-import android.widget.Toast;
 
 import com.example.empdata.R;
 
@@ -61,55 +60,56 @@ public class BluetoothFragment extends Fragment {
                             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.BLUETOOTH_SCAN}, 0);
                             return;
                         }
+                        bluetoothAdapter.startDiscovery();
+
                     }
-                    bluetoothAdapter.startDiscovery();
                     if (bluetoothAdapter.isDiscovering()) {
+                        Toast.makeText(requireContext(), "Bluetooth Discovery NOT Started", Toast.LENGTH_LONG).show();
+
                         // Bluetooth is currently discovering new devices
-                        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-                        getActivity().registerReceiver(bluetoothReceiver, filter);
-                        Toast.makeText(requireContext(),"Bluetooth Discovery Started",Toast.LENGTH_LONG).show();
+
                     } else {
                         // Bluetooth is not currently discovering new devices
-                        Toast.makeText(requireContext(),"Bluetooth Discovery NOT Started",Toast.LENGTH_LONG).show();
+                        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                        requireContext().registerReceiver(bluetoothReceiver, filter);
+                        Toast.makeText(requireContext(), "Bluetooth Discovery Started", Toast.LENGTH_LONG).show();
                     }
 
-                    arrayAdapter = new ArrayAdapter<>(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,stringArrayList);
+                    arrayAdapter = new ArrayAdapter<>(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, stringArrayList);
                     scannedListView.setAdapter(arrayAdapter);
-
-
                 }
-            }else {
+            } else {
+
                 // Turn off Bluetooth
                 bluetoothAdapter.disable();
                 requireContext().unregisterReceiver(bluetoothReceiver);
+
             }
         });
-
-
-
-
         return view;
     }
 
+
     private boolean checkBluetoothPermission() {
         if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(),new String[] {Manifest.permission.BLUETOOTH}, BLUETOOTH_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.BLUETOOTH}, BLUETOOTH_PERMISSION_REQUEST_CODE);
             return false;
         }
         return true;
     }
 
-   private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(requireContext(),"Bluetooth Receiver is called",Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), "Bluetooth Receiver is called", Toast.LENGTH_LONG).show();
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(checkBluetoothPermission()){
-                stringArrayList.add(device.getName());
-                Log.d("Tag",device.getName());}
+                if (checkBluetoothPermission()) {
+                    stringArrayList.add(device.getName());
+                    Log.d("Tagger", device.getName());
+                }
                 arrayAdapter.notifyDataSetChanged();
             }
         }

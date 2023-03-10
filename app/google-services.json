@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "298520761840",
+    "project_id": "empdata231",
+    "storage_bucket": "empdata231.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298520761840:android:0d9e316ac1e6864ffef935",
+        "android_client_info": {
+          "package_name": "com.example.empdata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298520761840-lepqv6ks5h40nmr6lduq2pem2uls3hqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCENmStq0oxDx8pu3K6uyX1jtinDC1yx1M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298520761840-lepqv6ks5h40nmr6lduq2pem2uls3hqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,21 +4,26 @@ package com.example.empdata.presenter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 
-import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.view.HomeFragment;
 import com.example.empdata.view.LoginFragment;
+import com.example.empdata.view.ProfileFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 
 public class LoginPresenter {
     private final LoginFragment mLoginFragment;
     private final EmployeeDatabase mDatabase;
-    String userName;
-    private String editTextValue;
 
     public LoginPresenter(LoginFragment loginFragment, EmployeeDatabase database) {
         mLoginFragment = loginFragment;
@@ -27,7 +32,7 @@ public class LoginPresenter {
 
 
     public void onLoginButtonClicked() {
-        String email = mLoginFragment.mEmployeeEmail.getText().toString();
+        String email = mLoginFragment.mEmployeeUserName.getText().toString();
         String password = mLoginFragment.mEmployeePassword.getText().toString();
         boolean isLoggedIn = mDatabase.employeeDao().isUserValid(email, password);
         SharedPreferences.Editor editor = mLoginFragment.requireActivity().getPreferences(Context.MODE_PRIVATE).edit();
@@ -45,6 +50,9 @@ public class LoginPresenter {
     public void onSignUpClicked(){
         mLoginFragment.showAddEmployee();
     }
+
+
+        
 
 }
 

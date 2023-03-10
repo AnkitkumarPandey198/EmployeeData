@@ -15,12 +15,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
+import com.example.empdata.news.newsview.NewsFragment;
 import com.example.empdata.presenter.AddEmployeePresenter;
 
 
 public class AddEmployeeFragment extends Fragment {
 
-    public EditText mNameEditText,mPositionEditText,mSalaryEditText,mAgeEditText,mEmailEditText,mPasswordEditText;
+    public EditText mNameEditText,mPositionEditText,mSalaryEditText,mAgeEditText,mEmailEditText,mPasswordEditText,mUserNameEditText;
     AddEmployeePresenter mPresenter;
 
     @Override
@@ -46,6 +47,7 @@ public class AddEmployeeFragment extends Fragment {
         mSalaryEditText = view.findViewById(R.id.employeeSalary);
         mEmailEditText =  view.findViewById(R.id.employeeEmail);
         mPasswordEditText = view.findViewById(R.id.employeePassword);
+        mUserNameEditText = view.findViewById(R.id.employeeUserName);
         Button mSaveButton = view.findViewById(R.id.addEmployeeBtn);
 
         mSaveButton.setOnClickListener(v -> mPresenter.onSaveButtonClicked());
@@ -131,5 +133,11 @@ public class AddEmployeeFragment extends Fragment {
             isValid = false;
         }
         return isValid;
+    }
+
+    public void navigateToLogin() {
+        LoginFragment mFragment = new LoginFragment();
+        mFragment.setArguments(new Bundle());
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
     }
 }
