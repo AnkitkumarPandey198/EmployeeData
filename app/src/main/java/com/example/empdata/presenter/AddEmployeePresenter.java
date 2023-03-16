@@ -2,7 +2,7 @@ package com.example.empdata.presenter;
 
 import android.widget.Toast;
 
-import com.example.empdata.firebaseDatabase.EmployeeHelperClass;
+import com.example.empdata.firebaseDatabase.Employees;
 import com.example.empdata.model.Employee;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.view.AddEmployeeFragment;
@@ -32,7 +32,7 @@ public class AddEmployeePresenter {
         String position = mAddEmployeeFragment.mPositionEditText.getText().toString();
         String email = mAddEmployeeFragment.mEmailEditText.getText().toString();
         String password = mAddEmployeeFragment.mPasswordEditText.getText().toString();
-        String username = mAddEmployeeFragment.mUserNameEditText.getText().toString();
+        String username = name.toLowerCase().replace(' ', '_');
         try {
             age = Integer.parseInt(mAddEmployeeFragment.mAgeEditText.getText().toString());
         } catch (NumberFormatException e) {
@@ -47,7 +47,7 @@ public class AddEmployeePresenter {
         }
 
         if(mAddEmployeeFragment.isInputValid()) {
-            EmployeeHelperClass helperClass = new EmployeeHelperClass(name, age, position, salary, email, password,username);
+            Employees helperClass = new Employees(name, age, position, salary, email, password,username);
             reference.child(username).setValue(helperClass);
             mAddEmployeeFragment.navigateToLogin();
             employee = new Employee(name, age, position, salary, email, password);

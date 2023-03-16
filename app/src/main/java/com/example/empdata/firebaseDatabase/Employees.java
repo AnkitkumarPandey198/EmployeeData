@@ -1,6 +1,6 @@
 package com.example.empdata.firebaseDatabase;
 
-public class EmployeeHelperClass {
+public class Employees {
 
     private String name;
     private int age;
@@ -11,11 +11,11 @@ public class EmployeeHelperClass {
 
     private String username;
 
-    public EmployeeHelperClass(){
+    public Employees(){
 
     }
 
-    public EmployeeHelperClass(String name, int age, String position, int salary, String email, String password,String username) {
+    public Employees(String name, int age, String position, int salary, String email, String password, String username) {
         this.name = name;
         this.age = age;
         this.position = position;

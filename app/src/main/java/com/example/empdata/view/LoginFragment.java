@@ -132,11 +132,11 @@ public class LoginFragment extends Fragment {
                         bundle.putInt("salary", userSalaryFromDB);
                         bundle.putString("position", userPositionFromDB);
                         bundle.putString("password", passwordFromDB);
+                        EditProfileFragment mFragment2 = new EditProfileFragment();
                         ProfileFragment mFragment = new ProfileFragment();
                         mFragment.setArguments(bundle);
+                        mFragment2.setArguments(bundle);
                         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
-
-
 
                     } else {
                         mEmployeePassword.setError("Invalid Credentials");

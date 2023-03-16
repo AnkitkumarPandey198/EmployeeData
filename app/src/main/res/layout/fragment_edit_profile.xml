@@ -14,30 +14,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:background="#E91E63"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="Add Employee"
-                app:titleMarginStart="85dp"
-                app:titleTextColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/add_employees"
+                android:text="Edit Profile"
                 android:textSize="45sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -114,6 +101,14 @@
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout7"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout5"
@@ -153,14 +148,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/addEmployeeBtn"
+                android:id="@+id/saveBtn"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
                 android:background="@drawable/shape"
                 android:text="@string/addEmployees"
                 android:textColor="@color/white"
-                android:layout_marginBottom="35dp"
                 app:layout_constraintEnd_toEndOf="@id/textInputLayout6"
                 app:layout_constraintStart_toStartOf="@id/textInputLayout6"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayout6"

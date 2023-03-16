@@ -47,7 +47,6 @@ public class AddEmployeeFragment extends Fragment {
         mSalaryEditText = view.findViewById(R.id.employeeSalary);
         mEmailEditText =  view.findViewById(R.id.employeeEmail);
         mPasswordEditText = view.findViewById(R.id.employeePassword);
-        mUserNameEditText = view.findViewById(R.id.employeeUserName);
         Button mSaveButton = view.findViewById(R.id.addEmployeeBtn);
 
         mSaveButton.setOnClickListener(v -> mPresenter.onSaveButtonClicked());
