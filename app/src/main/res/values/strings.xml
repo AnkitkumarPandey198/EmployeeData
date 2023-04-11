@@ -73,6 +73,7 @@
     <string name="done">Done</string>
     <string name="movie_name">movie_name</string>
     <string name="rating_tv">rating_tv</string>
+    <string name="skip">Skip</string>
 
 
 </resources>
