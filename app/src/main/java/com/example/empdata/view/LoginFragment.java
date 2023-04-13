@@ -12,12 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.presenter.LoginPresenter;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
 
 public class LoginFragment extends Fragment {
     public EditText mEmployeeUserName;
@@ -37,6 +40,10 @@ public class LoginFragment extends Fragment {
     private static final String IS_LOGGED_IN = "is_logged_in";
     String userName;
 
+    private Target[] targets;
+    private int currentIndex = 0;
+    private ShowcaseView showcaseView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,6 +54,7 @@ public class LoginFragment extends Fragment {
         mEmployeePassword = view.findViewById(R.id.employeePassword);
         mLoginButton = view.findViewById(R.id.loginBtn);
         mSignView = view.findViewById(R.id.needAccount);
+        login_user_guide(view);
         mLoginButton.setOnClickListener(v ->{
 //            String username = mEmployeePassword.getText().toString();
 //            userName = database.employeeDao().getUserName(username);
@@ -152,6 +160,77 @@ public class LoginFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+    }
+
+
+    void login_user_guide(View view) {
+
+        // Initialize the views to showcase
+        targets = new Target[] {
+                new ViewTarget(view.findViewById(R.id.employeeEmail)),
+                new ViewTarget(view.findViewById(R.id.employeePassword)),
+                new ViewTarget(view.findViewById(R.id.loginBtn)),
+                new ViewTarget(view.findViewById(R.id.needAccount)),
+                new ViewTarget(view.findViewById(R.id.forgetPassword))
+
+        };
+
+
+        // Initialize the views title to showcase
+        String[] loginPageTitle = {"User's Email Address",
+                "User's Password",
+                "Login Button",
+                "SignUP Link",
+                "Forget Password"
+        };
+
+        // Initialize the views description to showcase
+        String[] loginPageDescription = {"Here User enter his/her Email.",
+                "Here User enter his/her Password.",
+                "This is Login Button.",
+                "This is SignUp Page Link.",
+                "This is Forget Password Link."
+
+        };
+
+        //Initialize  the Custom Button
+        Button customSkipButton = (Button) LayoutInflater.from(requireContext()).inflate(R.layout.custom_button, null);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        layoutParams.bottomMargin = 24;
+        layoutParams.leftMargin = 24;
+        customSkipButton.setLayoutParams(layoutParams);
+
+        // Show the Showcase view
+        showcaseView = new ShowcaseView.Builder(requireActivity())
+                .setTarget(targets[currentIndex])
+                .setContentTitle(loginPageTitle[currentIndex])
+                .setContentText(loginPageDescription[currentIndex])
+                .build();
+
+        showcaseView.addView(customSkipButton);
+
+        //Next Button to Skip the Tutorial
+        showcaseView.setButtonText("Next");
+        showcaseView.overrideButtonClick(v -> {
+            currentIndex++;
+            if (currentIndex < targets.length) {
+                showcaseView.setTarget(targets[currentIndex]);
+                showcaseView.setContentTitle(loginPageTitle[currentIndex]);
+                showcaseView.setContentText(loginPageDescription[currentIndex]);
+            } else {
+                showcaseView.hide();
+                Toast.makeText(requireActivity(), "End of tutorial", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Skip Button to skip the Tutorial
+        customSkipButton.setOnClickListener(v -> showcaseView.hide());
 
     }
 }
