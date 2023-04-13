@@ -40,7 +40,6 @@
                         android:scaleType="centerCrop"
                         android:id="@+id/img_head"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/not_available"
                         />
 
                     <TextView

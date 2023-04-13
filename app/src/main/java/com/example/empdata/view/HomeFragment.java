@@ -32,6 +32,10 @@ import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.material.navigation.NavigationView;
 
+import smartdevelop.ir.eram.showcaseviewlib.GuideView;
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
+import smartdevelop.ir.eram.showcaseviewlib.config.PointerType;
+
 
 public class HomeFragment extends Fragment {
 
@@ -44,9 +48,9 @@ public class HomeFragment extends Fragment {
 
     String userName;
 
-    private Target[] targets;
-    private int currentIndex = 0;
-    private ShowcaseView showcaseView;
+
+    private GuideView mGuideView;
+    private GuideView.Builder builder;
 
 
     @SuppressLint("NonConstantResourceId")
@@ -165,89 +169,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    void login_user_guide(View view) {
-
-        // Initialize the views to showcase
-        targets = new Target[]{
-                new ViewTarget(view.findViewById(R.id.employeeEmail)),
-                new ViewTarget(view.findViewById(R.id.employeePassword)),
-                new ViewTarget(view.findViewById(R.id.loginBtn)),
-                new ViewTarget(view.findViewById(R.id.needAccount)),
-                new ViewTarget(view.findViewById(R.id.forgetPassword))
-
-        };
-
-        // Initialize the views title to showcase
-        String[] loginPageTitle = {"User's Email Address",
-                "User's Password",
-                "Login Button",
-                "SignUP Link",
-                "Forget Password"
-        };
-
-        // Initialize the views description to showcase
-        String[] loginPageDescription = {"Here User enter his/her Email.",
-                "Here User enter his/her Password.",
-                "This is Login Button.",
-                "This is SignUp Page Link.",
-                "This is Forget Password Link."
-
-        };
-
-        //Initialize  the Custom Button
-        Button customSkipButton = (Button) LayoutInflater.from(requireContext()).inflate(R.layout.custom_button, null);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        layoutParams.bottomMargin = 24;
-        layoutParams.leftMargin = 24;
-        customSkipButton.setLayoutParams(layoutParams);
 
 
-        // Show the Showcase view
-        showcaseView = new ShowcaseView.Builder(requireActivity())
-                .setTarget(targets[currentIndex])
-                .setContentTitle(loginPageTitle[currentIndex])
-                .setContentText(loginPageDescription[currentIndex])
-                .setStyle(R.style.ShowcaseView)
-                .build();
 
-
-        showcaseView.addView(customSkipButton);
-
-        //Next Button to Skip the Tutorial
-        showcaseView.setButtonText("Next");
-
-        showcaseView.overrideButtonClick(v -> {
-
-            currentIndex++;
-
-            if (currentIndex < targets.length) {
-
-                showcaseView.setTarget(targets[currentIndex]);
-                showcaseView.setContentTitle(loginPageTitle[currentIndex]);
-                showcaseView.setContentText(loginPageDescription[currentIndex]);
-
-            } else {
-
-                showcaseView.hide();
-                showcaseView.hideButton();
-                Toast.makeText(requireActivity(), "End of tutorial", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Skip Button to skip the Tutorial
-        customSkipButton.setOnClickListener(v -> {
-
-            showcaseView.hide();
-            showcaseView.hideButton();
-
-        });
-
-    }
 
 }
 
