@@ -25,7 +25,6 @@ public class EditProfileFragment extends Fragment {
     public int mAge,mSalary;
     Button saveButton;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

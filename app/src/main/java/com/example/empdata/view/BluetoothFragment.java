@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -35,7 +34,7 @@ public class BluetoothFragment extends Fragment {
     private static final int BLUETOOTH_PERMISSION_REQUEST_CODE = 1;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     ListView scannedListView;
-    ArrayList<String> stringArrayList = new ArrayList<String>();
+    ArrayList<String> stringArrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
 
@@ -48,7 +47,7 @@ public class BluetoothFragment extends Fragment {
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> getParentFragmentManager().popBackStack());
         scannedListView = view.findViewById(R.id.bluetooth_device_view);
-        Switch bluetoothSwitch = view.findViewById(R.id.bluetooth_switch);
+         Switch bluetoothSwitch = view.findViewById(R.id.bluetooth_switch);
 
         bluetoothSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {

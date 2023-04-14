@@ -15,13 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
-import com.example.empdata.news.newsview.NewsFragment;
 import com.example.empdata.presenter.AddEmployeePresenter;
 
 
 public class AddEmployeeFragment extends Fragment {
 
-    public EditText mNameEditText,mPositionEditText,mSalaryEditText,mAgeEditText,mEmailEditText,mPasswordEditText,mUserNameEditText;
+    public EditText mNameEditText,mPositionEditText,mSalaryEditText,mAgeEditText,mEmailEditText,mPasswordEditText;
     AddEmployeePresenter mPresenter;
 
     @Override
@@ -54,19 +53,14 @@ public class AddEmployeeFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getParentFragmentManager().popBackStack();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         return view;
     }
 
 
     public boolean isInputValid() {
-        boolean isValid = true;
+        boolean isValid;
 
         String name = mNameEditText.getText().toString();
         String position = mPositionEditText.getText().toString();
@@ -78,32 +72,27 @@ public class AddEmployeeFragment extends Fragment {
         boolean hasUpper = !password.equals(password.toLowerCase());
         boolean hasLower = !password.equals(password.toUpperCase());
         boolean hasDigit = password.matches(".*\\d+.*");
-        boolean hasSpecial = !password.matches("[A-Za-z0-9 ]*");
+        boolean hasSpecial = !password.matches("[A-Za-z\\d ]*");
         boolean isValidatePassword = hasUpper && hasLower && hasDigit && hasSpecial;
 
-        String emailPattern = "[a-z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-z\\d._-]+@[a-z]+\\.+[a-z]+";
         boolean isValidate = email.matches(emailPattern);
 
         if (TextUtils.isEmpty(name)) {
             mNameEditText.setError("Name is required");
-            isValid = false;
         }
 
         if (TextUtils.isEmpty(position)) {
             mPositionEditText.setError("Position is required");
-            isValid = false;
         }
 
         if (TextUtils.isEmpty(email)) {
             mEmailEditText.setError("Email is required");
-            isValid = false;
         } else if (isValidate) {
             Toast.makeText(requireActivity().getApplicationContext(), "Email is Correct", Toast.LENGTH_SHORT).show();
-            isValid = true;
 
         } else {
             mEmailEditText.setError("Invalid email format");
-            isValid = false;
         }
 
         if (TextUtils.isEmpty(password)) {
@@ -139,4 +128,7 @@ public class AddEmployeeFragment extends Fragment {
         mFragment.setArguments(new Bundle());
         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mFragment).addToBackStack("name").commit();
     }
+
+
+
 }
