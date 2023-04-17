@@ -26,9 +26,9 @@ public class MainActivity2 extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if(!isLoggedIn) {
-            getSupportFragmentManager().popBackStack();
-        }else {
             fragmentTransaction.replace(R.id.fragmentContainerView, new HomeFragment());
+        }else {
+            getSupportFragmentManager().popBackStack();
         }
         fragmentTransaction.commit();
 

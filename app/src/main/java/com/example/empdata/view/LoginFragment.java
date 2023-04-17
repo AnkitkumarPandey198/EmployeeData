@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ankitkrpandey.userguideview.UserGuideView;
+import com.ankitkrpandey.userguideview.config.Gravity;
+import com.ankitkrpandey.userguideview.config.PointerType;
 import com.example.empdata.R;
 import com.example.empdata.model.EmployeeDatabase;
 import com.example.empdata.presenter.LoginPresenter;
@@ -28,11 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import smartdevelop.ir.eram.showcaseviewlib.GuideView;
-import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
-import smartdevelop.ir.eram.showcaseviewlib.config.PointerType;
-import smartdevelop.ir.eram.showcaseviewlib.listener.GuideListener;
-
 
 public class LoginFragment extends Fragment {
     public EditText mEmployeeUserName;
@@ -44,8 +42,10 @@ public class LoginFragment extends Fragment {
     private static final String IS_LOGGED_IN = "is_logged_in";
     String userName;
 
-    private GuideView mGuideView;
-    private GuideView.Builder builder;
+    private UserGuideView mGuideView;
+    private UserGuideView.Builder builder;
+
+    View customView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +60,7 @@ public class LoginFragment extends Fragment {
         mLoginButton = view.findViewById(R.id.loginBtn);
         mSignView = view.findViewById(R.id.needAccount);
         guideViewLoginUser();
+
 
         mLoginButton.setOnClickListener(v ->{
 //            String username = mEmployeePassword.getText().toString();
@@ -174,44 +175,45 @@ public class LoginFragment extends Fragment {
     void guideViewLoginUser(){
 
         //Custom View for the Buttons
-        View customView = LayoutInflater.from(requireContext()).inflate(R.layout.showcase_layout_button,  null);
+        customView = LayoutInflater.from(requireContext()).inflate(R.layout.showcase_layout_button,  null);
 
         //Guide view Implementer
-        builder = new GuideView.Builder(requireContext())
+        builder = new UserGuideView.Builder(requireContext())
                 .setTitle("Login Title")
                 .setContentText("This is the Login Title.")
                 .setGravity(Gravity.center)
                 .setPointerType(PointerType.circle)
                 .setTargetView(mLoginTitle)
-                .setGuideListener(v -> {
-                    switch (v.getId()) {
-                        case R.id.login_Title:
-                            builder.setTargetView(mEmployeeUserName).setTitle("Email Field").setContentText("This is the Email Field.").build();
-                            mGuideView.removeView(customView);
-                            break;
-                        case R.id.employeeEmail:
-                            builder.setTargetView(mEmployeePassword).setTitle("Password Field").setContentText("This is the Password Field.").build();
-                            mGuideView.removeView(customView);
-                            break;
-                        case R.id.employeePassword:
-                            builder.setTargetView(mLoginButton).setTitle("Login Button").setContentText("This is the Login Button.").build();
-                            mGuideView.removeView(customView);
-                            break;
-                        case R.id.loginBtn:
-                            builder.setTargetView(mSignView).setTitle("Sign UP Link").setContentText("This is the Sign UP Link.").build();
-                            mGuideView.removeView(customView);
-                            break;
-                        case R.id.needAccount:
-                            builder.setTargetView(mForgetPassword).setTitle("Forget Password Link").setContentText("This is the Forget Password Link.").build();
-                            mGuideView.removeView(customView);
-                            break;
-                        case R.id.forgetPassword:
-                            return;
-                    }
-                    mGuideView = builder.build();
-                    mGuideView.addView(customView);
-                    mGuideView.show();
-                });
+                .setUserGuideListener(v -> {
+            switch (v.getId()) {
+                case R.id.login_Title:
+                    builder.setTargetView(mEmployeeUserName).setTitle("Email Field").setContentText("This is the Email Field.").build();
+                    mGuideView.removeView(customView);
+                    break;
+                case R.id.employeeEmail:
+                    builder.setTargetView(mEmployeePassword).setTitle("Password Field").setContentText("This is the Password Field.").build();
+                    mGuideView.removeView(customView);
+                    break;
+                case R.id.employeePassword:
+                    builder.setTargetView(mLoginButton).setTitle("Login Button").setContentText("This is the Login Button.").build();
+                    mGuideView.removeView(customView);
+                    break;
+                case R.id.loginBtn:
+                    builder.setTargetView(mSignView).setTitle("Sign UP Link").setContentText("This is the Sign UP Link.").build();
+                    mGuideView.removeView(customView);
+                    break;
+                case R.id.needAccount:
+                    builder.setTargetView(mForgetPassword).setTitle("Forget Password Link").setContentText("This is the Forget Password Link.").build();
+                    mGuideView.removeView(customView);
+                    break;
+                case R.id.forgetPassword:
+                    return;
+            }
+            mGuideView = builder.build();
+            mGuideView.addView(customView);
+            mGuideView.show();
+        });
+
 
         mGuideView = builder.build();
         mGuideView.addView(customView);
@@ -221,5 +223,12 @@ public class LoginFragment extends Fragment {
         Button button1 = customView.findViewById(R.id.next_button);
         button1.setOnClickListener(v -> mGuideView.dismiss());
 
+        Button button2 = customView.findViewById(R.id.skip_button);
+        button2.setOnClickListener(v -> mGuideView.dismissAll());
+
+
     }
+
+
+
 }
